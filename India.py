@@ -1,9 +1,6 @@
 import requests;
 from bs4 import  BeautifulSoup;
-import Tkinter as tk;
-import plyer;
-import time;
-import datetime;
+import tkinter as tk;
 from PIL import ImageTk,Image;
 
 import os
@@ -27,7 +24,7 @@ def get_corona_detail():
     try:
         html_data = get_html_data(url);
     except Exception as e:
-        print "Failed to connect to Internet";
+        print("Failed to connect to Internet");
         exit();
     soup = BeautifulSoup(html_data.text,"html.parser");
     container = soup.find("div",class_="site-stats-count").findAll("li");
@@ -42,24 +39,20 @@ def main():
 
 def refresh():
     newdata = get_corona_detail();
-    print "refreshing....";
+    print("refreshing....");
     mainlabel['text']= newdata;
 
 root = tk.Tk();
-root.geometry("800x600");
+root.geometry("800x400");
 root.title("Corona Live Update India");
 f = ("poppins",25,"normal");
 
-image = Image.open(resource_path("icon.png"));
-image = image.resize((250,250));
-banner = ImageTk.PhotoImage(image);
-bannerlabel = tk.Label(root,image=banner);
-bannerlabel.pack();
 
 mainlabel = tk.Label(root,text=get_corona_detail(),font = f);
 mainlabel.pack();
 
-rebt= tk.Button(root,text="Refresh",font = f,relief = 'solid',height=30,width=50,command=refresh);
+tk.Label(root,text="").pack();
+rebt= tk.Button(root,text="Refresh",font = f,relief = 'solid',command=refresh);
 rebt.pack();
 
 

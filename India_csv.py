@@ -16,7 +16,7 @@ def get_corona_detail():
     try:
         html_data = get_html_data(url);
     except Exception as e:
-        print "Failed to connect to Internet";
+        print("Failed to connect to Internet");
         exit();
     soup = BeautifulSoup(html_data.text,"html.parser");
     container = soup.find("div",class_="site-stats-count").findAll("li");
